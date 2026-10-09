@@ -1,0 +1,17 @@
+---
+import { benefits } from '../data/site';
+---
+
+<section class="section container" style="padding-top:90px">
+  <div class="benefits">
+    {benefits.map((b, i) => (
+      <div class="benefit reveal" style={`--d:${i * 0.1}s`}>
+        <div class="benefit__ic">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#c3c53a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={b.icon}></path></svg>
+        </div>
+        <h3>{b.t}</h3>
+        <p>{b.d}</p>
+      </div>
+    ))}
+  </div>
+</section>

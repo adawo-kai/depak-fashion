@@ -1,0 +1,39 @@
+---
+import { products } from '../data/site';
+
+const fmt = (n: number) => new Intl.NumberFormat('ru-RU').format(n).replace(/ /g, ' ') + ' сом';
+---
+
+<section id="products" class="section container section--bordered" style="padding-top:70px;padding-bottom:100px">
+  <div class="head-row reveal">
+    <div>
+      <h2 class="h2" style="margin-bottom:0">Снаряжение <em>сезона</em></h2>
+      <div class="rule"></div>
+    </div>
+  </div>
+  <div class="products">
+    {products.map((p, i) => (
+      <article class="card reveal" style={`--d:${i * 0.1}s`}>
+        <div class="card__img"><img src={p.image} alt={p.name} loading="lazy" /></div>
+        <div class="card__body">
+          <div class="card__tag">{p.tag}</div>
+          <div class="card__name">{p.name}</div>
+          <div class="card__foot">
+            <span class="card__price">{fmt(p.price)}</span>
+            <button
+              class="add"
+              aria-label={`Добавить в корзину: ${p.name}`}
+              data-add
+              data-id={p.id}
+              data-name={p.name}
+              data-price={p.price}
+              data-image={p.image}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 12H6L5 8z"></path><path d="M9 8a3 3 0 016 0"></path></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

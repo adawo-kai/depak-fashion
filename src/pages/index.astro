@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Categories from '../components/Categories.astro';
+import Products from '../components/Products.astro';
+import About from '../components/About.astro';
+import Banner from '../components/Banner.astro';
+import Benefits from '../components/Benefits.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import CartDrawer from '../components/CartDrawer.astro';
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero />
+    <Categories />
+    <Products />
+    <About />
+    <Banner />
+    <Benefits />
+    <Contact />
+  </main>
+  <Footer />
+  <CartDrawer />
+</Layout>
+
+<script>
+  import '../scripts/hero';
+  import '../scripts/cart';
+  import '../scripts/ui';
+</script>

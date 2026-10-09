@@ -1,0 +1,25 @@
+---
+import { nav } from '../data/site';
+---
+
+<header class="header" id="header">
+  <a href="#top" class="logo">
+    <b>DEPAK</b>
+    <span>DEPAK.fashion</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Основная навигация">
+    <button class="icon-btn nav-close" id="nav-close" aria-label="Закрыть меню">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+    </button>
+    {nav.map((n, i) => <a href={n.href} class={i === 0 ? 'active' : ''}>{n.label}</a>)}
+  </nav>
+  <div class="header__right">
+    <button class="icon-btn" id="cart-open" aria-label="Открыть корзину">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6L5 8z"></path><path d="M9 8a3 3 0 016 0"></path></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon-btn burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+    </button>
+  </div>
+</header>

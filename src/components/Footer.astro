@@ -1,0 +1,28 @@
+---
+import { contacts, footCols } from '../data/site';
+---
+
+<footer class="footer">
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <b>DEPAK</b>
+      <small>DEPAK.FASHION</small>
+      <p>Одежда для горных походов. {contacts.city}.</p>
+      <div>
+        <a href={`tel:+${contacts.phoneRaw}`}>{contacts.phoneDisplay}</a><br />
+        <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
+      </div>
+    </div>
+    {footCols.map((col) => (
+      <div>
+        <h4>{col.h}</h4>
+        <ul>
+          {col.items.map((i) => (
+            <li><a href={i.href} {...(i.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>{i.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <div class="footer__bottom">© 2026 DEPAK.fashion. Все права защищены.</div>
+</footer>

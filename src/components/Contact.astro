@@ -1,0 +1,66 @@
+---
+import { contacts } from '../data/site';
+---
+
+<section id="contacts" class="section container section--bordered">
+  <div class="contact">
+    <div class="reveal">
+      <div class="hand">на связи</div>
+      <h2 class="h2">Контакты</h2>
+      <div class="rule" style="margin-bottom:28px"></div>
+      <p>Задайте вопрос о размерах, наличии или доставке — ответим в течение рабочего дня.</p>
+      <div class="contact__list">
+        <div><span>Телефон / WhatsApp</span><a href={`tel:+${contacts.phoneRaw}`}>{contacts.phoneDisplay}</a></div>
+        <div><span>Почта</span><a href={`mailto:${contacts.email}`}>{contacts.email}</a></div>
+        <div><span>Город</span>{contacts.city}</div>
+      </div>
+    </div>
+
+    <form class="form reveal" id="contact-form" style="--d:.15s" novalidate>
+      <label class="field">Имя<input type="text" name="name" required maxlength="80" autocomplete="name" /></label>
+      <label class="field">Телефон или почта<input type="text" name="contact" required maxlength="80" autocomplete="tel" /></label>
+      <label class="field">Сообщение<textarea name="message" required maxlength="1000"></textarea></label>
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button class="btn" type="submit">Отправить</button>
+      <p class="form__status" id="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<script define:vars={{ email: contacts.email }}>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    if (!data.get('name').trim() || !data.get('contact').trim() || !data.get('message').trim()) {
+      status.className = 'form__status err';
+      status.textContent = 'Заполните все поля.';
+      return;
+    }
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    status.className = 'form__status';
+    status.textContent = 'Отправляем…';
+    data.set('_subject', 'Новое сообщение с сайта DEPAK.fashion');
+    data.set('_captcha', 'false');
+    data.set('_template', 'table');
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data,
+      });
+      const json = await res.json();
+      if (!res.ok || json.success === 'false' || json.success === false) throw new Error();
+      form.reset();
+      status.className = 'form__status ok';
+      status.textContent = 'Спасибо! Сообщение отправлено, мы скоро свяжемся с вами.';
+    } catch {
+      status.className = 'form__status err';
+      status.textContent = 'Не удалось отправить. Напишите нам в WhatsApp или на почту.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

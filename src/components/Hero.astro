@@ -1,0 +1,43 @@
+---
+import { heroSlides } from '../data/site';
+---
+
+<section class="hero" id="top" data-hero data-interval="6000">
+  {heroSlides.map((s, i) => (
+    <div class={`hero__slide${i === 0 ? ' active' : ''}`} data-slide>
+      <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
+    </div>
+  ))}
+  <div class="hero__shade"></div>
+
+  <div class="hero__dots" role="tablist" aria-label="Слайды">
+    {heroSlides.map((_, i) => (
+      <button class={`hero__dot${i === 0 ? ' active' : ''}`} data-dot role="tab" aria-label={`Слайд ${i + 1}`}>
+        <span>{String(i + 1).padStart(2, '0')}</span><i></i>
+      </button>
+    ))}
+  </div>
+
+  <div class="hero__body">
+    {heroSlides.map((s, i) => (
+      <div class={`hero__content${i === 0 ? ' active' : ''}`} data-content>
+        <div class="hero__eyebrow">{s.eyebrow}</div>
+        {i === 0 ? <h1>{s.title}</h1> : <div class="h1like">{s.title}</div>}
+        <p>{s.text}</p>
+        <a href="#products" class="btn">Смотреть коллекцию</a>
+      </div>
+    ))}
+  </div>
+
+  <div class="hero__notes">
+    {heroSlides.map((s, i) => (
+      <button class={`hero__note${i === 0 ? ' active' : ''}`} data-note>
+        <b>{String(i + 1).padStart(2, '0')}</b>{s.note}
+      </button>
+    ))}
+  </div>
+</section>
+
+<style is:global>
+  .hero .h1like { font: 800 clamp(48px, 11vw, 168px) / 0.95 var(--f-display); letter-spacing: -0.02em; color: #fff; text-transform: uppercase; overflow-wrap: anywhere; }
+</style>

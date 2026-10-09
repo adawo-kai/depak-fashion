@@ -1,0 +1,19 @@
+---
+import { contacts } from '../data/site';
+---
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Корзина" aria-hidden="true" data-phone={contacts.phoneRaw}>
+  <div class="drawer__head">
+    <h3>Корзина</h3>
+    <button class="icon-btn" id="cart-close" aria-label="Закрыть корзину">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="cart-list"></div>
+  <div class="drawer__foot">
+    <div class="drawer__total"><span>Итого</span><b id="cart-total">0 сом</b></div>
+    <a class="btn" id="cart-checkout" href="#" target="_blank" rel="noopener" aria-disabled="true">Оформить в WhatsApp</a>
+    <p class="drawer__note">Заказ откроется в WhatsApp сообщением со списком товаров. Оплата и доставка обсуждаются с менеджером.</p>
+  </div>
+</aside>

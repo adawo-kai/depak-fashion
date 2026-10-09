@@ -1,0 +1,18 @@
+---
+import { categories } from '../data/site';
+---
+
+<section id="categories" class="section container">
+  <div class="center reveal">
+    <div class="hand">для тех, кто выше облаков</div>
+    <h2 class="h2">Категории</h2>
+  </div>
+  <div class="cats">
+    {categories.map((c, i) => (
+      <a href="#products" class="cat reveal" style={`--d:${i * 0.1}s`}>
+        <div class="cat__img"><img src={c.image} alt={c.name} loading="lazy" /></div>
+        <div class="cat__row"><div>{c.name}</div><span>{String(i + 1).padStart(2, '0')}</span></div>
+      </a>
+    ))}
+  </div>
+</section>
