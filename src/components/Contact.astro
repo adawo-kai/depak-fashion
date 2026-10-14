@@ -27,7 +27,7 @@ import { contacts } from '../data/site';
   </div>
 </section>
 
-<script define:vars={{ email: contacts.email }}>
+<script>
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
   form.addEventListener('submit', async (e) => {
@@ -42,17 +42,14 @@ import { contacts } from '../data/site';
     btn.disabled = true;
     status.className = 'form__status';
     status.textContent = 'Отправляем…';
-    data.set('_subject', 'Новое сообщение с сайта DEPAK.fashion');
-    data.set('_captcha', 'false');
-    data.set('_template', 'table');
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(data)),
       });
       const json = await res.json();
-      if (!res.ok || json.success === 'false' || json.success === false) throw new Error();
+      if (!res.ok || !json.ok) throw new Error();
       form.reset();
       status.className = 'form__status ok';
       status.textContent = 'Спасибо! Сообщение отправлено, мы скоро свяжемся с вами.';
